@@ -18,6 +18,9 @@ public class BirdHelper : MonoBehaviour
         if (transform.position.y < 4) {
             Fly();
         }
+        if (transform.position.y < -4) {
+            RestartHelper.instanse.ShowRestartButton();
+        }
     }
 
     private void Fly() {
@@ -28,8 +31,7 @@ public class BirdHelper : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
-        RestartHelper.instanse.restartButton.gameObject.SetActive(true);
-        Time.timeScale = 0.0F;
+        RestartHelper.instanse.ShowRestartButton();
     }
 
     void OnTriggerExit2D(Collider2D other) {

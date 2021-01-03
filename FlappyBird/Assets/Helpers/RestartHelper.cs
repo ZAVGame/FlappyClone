@@ -14,14 +14,22 @@ public class RestartHelper : MonoBehaviour
 
     private void Start()
     {
-        instanse = this;
-        DontDestroyOnLoad(this);
+        if (instanse == null) {
+            instanse = this;
+            DontDestroyOnLoad(this);
+        }
         restartButton.onClick.AddListener(Reset);
+        Time.timeScale = 1.0F;
     }
 
-    public void Reset() {
+    private void Reset() {
         SceneManager.LoadScene(mainSceneAsset.name);
-        Time.timeScale = 1.0F;
-        restartButton.gameObject.SetActive(false);
+    }
+
+    public void ShowRestartButton() {
+        if (!restartButton.IsActive()) {
+            restartButton.gameObject.SetActive(true);
+            Time.timeScale = 0.0F;
+        }
     }
 }
